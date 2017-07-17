@@ -1,46 +1,68 @@
-require './lib/player'
+require './lib/output'
+require './lib/board'
 
 class Computer
 
-  attr_accessor :computer_board
+  include Output
+
+  attr_reader :ships
+  attr_accessor :player_board
 
   def initialize
-    @computer_board = Board.new
+    @player_board = Board.new
     @ships = []
-    @two_grid_ship_spaces = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
-    @three_grid_ship_spaces = ["A1", "A2", "B1", "B2"]
-    @orrientation = ["H", "V"]
     @all_grid_spaces = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
   end
 
-
-
   def place_two_unit_ship
-    first_space = @two_grid_ship_spaces.sample
-    direction = @orrientation.sample
-    if direction == "H"
-      second_space = first_space[0] + first_space[1].next
-    elsif direction == "V"
-      second_space = first_space[0].next + first_space[1]
-    end
-    @ships << [first_space, second_space]
+    place_two_square_ships_message
+    input = gets.chomp.split(" ").sort
+      if @player_board.board.keys.any? { |key| key == input[0] } &&
+         @player_board.board.keys.any? { |key| key == input[1] } &&
+          (input.join[0].next == input.join[2] || input.join[1].next == input.join[3])
+        @ships << input
+      else
+        invalid_input
+        place_two_unit_ship
+      end
   end
 
   def place_three_unit_ship
-    first_space = @three_grid_ship_spaces.sample
-    direction = @orrientation.sample
-    if direction == "H"
-      second_space = first_space[0] + first_space[1].next
-      third_space = first_space[0] + first_space[1].next.next
-    elsif direction == "V"
-      second_space = first_space[0].next + first_space[1]
-      third_space = first_space[0].next.next + first_space[1]
+    place_three_square_ships_message
+    input = gets.chomp.split(" ").sort
+    if @player_board.board.any? { |key, value| key == input[0] } &&
+       @player_board.board.any? { |key, value| key == input[1] } &&
+       @player_board.board.any? { |key, value| key == input[2] } &&
+       @ships.flatten.none? { |ship| ship == input[0] && input[1] && input[2] } &&
+       (input.join[0].next == input.join[2] || input.join[1].next == input.join[3]) &&
+       (input.join[0].next.next == input.join[4] || input.join[1].next.next == input.join[5])
+      @ships << input
+    else
+      invalid_input_three_ship_placement
+      place_three_unit_ship
     end
-    @ships << [first_space, second_space, third_space]
+    binding.pry
   end
 
+
+
   def acquire_target
-    target = all_grid_spaces.sample
+    target = @all_grid_spaces.shuffle!.pop
+    @ships.flatten.each do |ship|
+      if ship == target
+        @ships[0].any? do |grid|
+          if grid == target
+            @ships[0].delete(target)
+          else
+            @ships[1].delete(target)
+          end
+        end
+        @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
+      else
+        @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
+      end
+    end
+  end
 
 
 end

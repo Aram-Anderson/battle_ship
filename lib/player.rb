@@ -1,70 +1,108 @@
 require './lib/computer'
 require './lib/output'
+require './lib/board'
 require 'pry'
 
 class Player
 
   include Output
 
-  attr_accessor :player_board
+  attr_reader :ships
+  attr_accessor :computer_board
+
 
   def initialize
-    @player_board = Board.new
+    @computer_board = Board.new
     @ships = []
+    @two_grid_vertical_ship_spaces = ["A1", "A2", "A3", "A4" "B1", "B2", "B3", "B4" "C1", "C2", "C3", "C4"]
+    @two_grid_horizontal_ship_spaces = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "D1", "D2", "D3"]
+    @three_grid_vertical_ship_spaces = ["A1", "A2", "A3", "A4" "B1", "B2", "B3", "B4"]
+    @three_grid_horitontal_ship_spaces = ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2"]
+    @orientation = ["H", "V"]
   end
 
+
+
   def place_two_unit_ship
-    place_two_square_ships_message
-    input = gets.chomp.split(" ").sort
-    binding.pry
-      if @player_board.board.any? { |key, value| key == input[0] } && @player_board.board.any? { |key, value| key == input[1] } &&
-      input.join[0].next == input.join[2] || input.join[1].next == input.join[3]
-        @ships << input
-      else
-        invalid_input
-        place_two_unit_ship
-      end
+    direction = @orientation.sample
+    if direction == "H"
+      first_space = @two_grid_horizontal_ship_spaces.sample
+      second_space = first_space[0] + first_space[1].next
+    elsif direction == "V"
+      first_space = @two_grid_vertical_ship_spaces.sample
+      second_space = first_space[0].next + first_space[1]
+    end
+    @ships << [first_space, second_space]
   end
 
   def place_three_unit_ship
-    place_three_square_ships_message
-    input = gets.chomp.split(" ").sort
-    if @player_board.board.any? { |key, value| key == input[0] } &&
-      @player_board.board.any? { |key, value| key == input[1] } &&
-      @player_board.board.any? { |key, value| key == input[2] } &&
-      @ships.flatten.none? { |ship| ship == input[0] && input[1] && input[2] } && (input.join[0].next == input.join[2] || input.join[1].next == input.join[3]) &&
-      (input.join[0].next.next == input.join[4] || input.join[1].next.next == input.join[5])
-      @ships << input
-    else
-      invalid_input_three_ship_placement
-      place_three_unit_ship
+    direction = @orientation.sample
+    if direction == "H"
+    first_space = @three_grid_horitontal_ship_spaces.sample
+      if @ships.flatten.none? {|ship| ship == first_space}
+        second_space = first_space[0] + first_space[1].next
+      else
+        place_three_unit_ship
+      end
+      if @ships.flatten.none? {|ship| ship == second_space}
+        third_space = first_space[0] + first_space[1].next.next
+      else
+        place_three_unit_ship
+      end
+      if @ships.flatten.none? {|ship| ship == third_space}
+        spaces = [first_space, second_space, third_space]
+      else
+        place_three_unit_ship
+      end
+    elsif direction == "V"
+    first_space = @three_grid_vertical_ship_spaces.sample
+      if @ships.flatten.none? {|ship| ship == first_space}
+        second_space = first_space[0].next + first_space[1]
+      else
+        place_three_unit_ship
+      end
+      if @ships.flatten.none? {|ship| ship == second_space}
+        third_space = first_space[0].next.next + first_space[1]
+      else
+        place_three_unit_ship
+      end
+      if @ships.flatten.none? {|ship| ship == third_space}
+        spaces = [first_space, second_space, third_space]
+      else
+        place_three_unit_ship
+      end
     end
+    @ships << spaces
   end
-
 
   def acquire_target
     fire_coordinates_message
-    input = gets.chomp
-    if @player_board.board.keys.any? { |key| key == input[0..1] }
-      fire(input)
+    target = gets.chomp
+    if @computer_board.board.keys.any? { |key| key == target[0..1] }
+      fire(target)
     else
-      invalid_input
+      invalid_target
       acquire_target
     end
   end
 
-  def fire(input)
-    if @player_board[input].strip.empty?
-      @ships.each do |array|
-        array.each do |ship|
-        if ship == input
-          @ships.delete(ship)
-          @player_board[ship] = "  \xF0\x9F\x92\xA5  "
+
+  def fire(target)
+    if @computer_board.board[target].strip.empty?
+      @ships.flatten.each do |ship|
+        if ship == target
+          @ships[0].any? do |grid|
+            if grid == target
+              @ships[0].delete(target)
+            else
+              @ships[1].delete(target)
+            end
+          end
+          @computer_board.board[target] = "  \xF0\x9F\x92\xA5  "
         else
-          @player_board[ship] = "  \xF0\x9F\x92\xA6  "
+          @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
         end
       end
-    end
     else
       already_fired_at_that_coordinate
       acquire_target

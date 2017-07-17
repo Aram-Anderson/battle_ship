@@ -33,6 +33,9 @@ module Output
     puts "You have entered an invalid selection. Please reenter your selection"
   end
 
+  def invalid_target
+    puts "That target is not on the board. Try again!"
+
   def place_two_square_ships_message
     puts "Please enter two grid coodinates which are touching one another, and either vertical or horizontal (ie A1 A2 || A1 B1)."
   end
