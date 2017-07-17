@@ -10,20 +10,22 @@ class Start
   include Output
 
   def initialize
-    game_process
     @computer = computer
     @player = player
+    game_process
   end
 
   def game_process
-    @player.place_ships
-    @computer.place_ships
+    @player.place_two_unit_ship
+    @player.place_three_unit_ship
+    @computer.place_two_unit_ship
+    @computer.place_three_unit_ship
     until @computer.ships.empty? || @player.ships.empty?
       @player.display_player_board
       @player.acquire_target
       @player.display_player_board
       next_turn_message
-      @computer.get_firing_coordinates
+      @computer.acquire_target
       @computer.display_computer_board
     end
     if @computer.ships.empty?

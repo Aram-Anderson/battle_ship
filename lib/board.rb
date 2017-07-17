@@ -1,5 +1,6 @@
 class Board
   attr_accessor :board
+  attr_reader :print_board
 
   def initialize
     @board =  {
@@ -20,10 +21,6 @@ class Board
       "D3" => "     ",
       "D4" => "     "
     }
-  end
-
-  def update(location, shot)
-    board[location] = shot
   end
 
   def print_board

@@ -9,10 +9,22 @@ class Player
     @ships = []
   end
 
+  def place_two_unit_ship
+    place_two_square_ships_message
+    input = gets.chomp.sort
+      if @player_board.keys.any? { |key| key == input[0..1] || input[3..4] } && input[0].next == input[3] || input[1].next == input[4]
+        @ships << [input]
+      else
+        invalid_input
+        place_ships
+      end
+  end
+
+
   def acquire_target
     fire_coordinates_message
     input = gets.chomp
-    if (input[0] == "A" || "B" || "C" || "D") && (input[1] == "1" || "2" || "3" || "4")
+    if @player_board.keys.any? { |key| key == input[0..1] }
       fire(input)
     else
       invalid_input
@@ -25,7 +37,7 @@ class Player
       @ships.each do |array|
         array.each do |ship|
         if ship == input
-          ship.delete
+          @ships.delete(ship)
           @player_board[ship] = "  \xF0\x9F\x92\xA5  "
         else
           @player_board[ship] = "  \xF0\x9F\x92\xA6  "

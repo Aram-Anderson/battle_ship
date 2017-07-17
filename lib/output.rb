@@ -29,6 +29,14 @@ module Output
     puts "You have entered an invalid selection. Please reenter your selection"
   end
 
+  def place_two_square_ships_message
+    puts "Please enter two grid coodinates which are next to each other on the board. The Grid coordinates must be touching one another (ie A1 A2)."
+  end
+
+  def def place_three_square_ships_message
+    puts "Please enter three grid coodinates which are next to each other on the board. The Grid coordinates must be touching one another (ie A1 A2 A3)."
+  end
+
   def fire_coordinates_message
     puts "What grid coordinate would you like to fire at? Enter a grid position beginning with a letter from A-D followed by a number from 1-4 (ie A2): "
   end
