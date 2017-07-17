@@ -10,8 +10,8 @@ class Start
   include Output
 
   def initialize
-    @computer = computer
-    @player = player
+    @computer = Computer.new
+    @player = Player.new
     game_process
   end
 

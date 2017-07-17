@@ -25,16 +25,20 @@ module Output
     puts "Thank you for playing!"
   end
 
+  def invalid_input_three_ship_placement
+    puts "You have entered an invalid selection. Your input was either not on the board, or there's already a ship at that location. Please reenter your selection"
+  end
+
   def invalid_input
     puts "You have entered an invalid selection. Please reenter your selection"
   end
 
   def place_two_square_ships_message
-    puts "Please enter two grid coodinates which are next to each other on the board. The Grid coordinates must be touching one another (ie A1 A2)."
+    puts "Please enter two grid coodinates which are touching one another, and either vertical or horizontal (ie A1 A2 || A1 B1)."
   end
 
-  def def place_three_square_ships_message
-    puts "Please enter three grid coodinates which are next to each other on the board. The Grid coordinates must be touching one another (ie A1 A2 A3)."
+  def place_three_square_ships_message
+    puts "Please enter three grid coodinates which are touching one another, and are either vertical or horizontal (ie A1 A2 A3 || A1 B1 C1)."
   end
 
   def fire_coordinates_message

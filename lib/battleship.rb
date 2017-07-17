@@ -1,5 +1,3 @@
-# require './lib/computer_ship_placement'
-# require './lib/player_ship_placement'
 require './lib/output'
 require 'pry'
 
@@ -30,7 +28,7 @@ include Output
   end
 
   def instructions
-    "##{show_instructions}\n\n"
+    show_instructions
     game_intro
   end
 
@@ -41,4 +39,4 @@ include Output
 
 end
 
-start = BattleShip.new
+# start = BattleShip.new
