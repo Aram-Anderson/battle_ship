@@ -21,28 +21,25 @@ class Start
     @computer.place_two_unit_ship
     @computer.place_three_unit_ship
     until @computer.ships.flatten.empty? || @player.ships.flatten.empty?
-      change_turns_player_message
       @player.acquire_target
-      player_board_message
-      @player.computer_board.print_board
-      change_turns_opponent_message
-      @computer.acquire_target
+      if @player.ships[0].empty? || @player.ships[1].empty?
+        sank_opponent_ship_message
+      end
       computer_board_message
+      @player.computer_board.print_board
+      @computer.acquire_target
+      if @computer.ships[0].empty? || @computer.ships[1].empty?
+        opponent_sank_your_ship_message
+      end
+      player_board_message
       @computer.player_board.print_board
     end
-    if @player.ships.empty?
+    if @player.ships.flatten.empty?
       win_message
     else
       lose_message
     end
-    play_again_message
-    input = gets.chomp
-    if input.downcase == "y" || "yes"
-      new_game = BattleShip.new
-    else
-      quit_message
-      exit
-    end
+    new_game = BattleShip.new
   end
 
 

@@ -47,25 +47,15 @@ class Computer
 
   def acquire_target
     target = @all_grid_spaces.shuffle!.pop
-    @ships.flatten.each do |ship|
-      if target == ship
-        @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
-        @ships[0].each do |ship|
-          if ship == target
-          @ships[0].delete(target)
-          end
-        end
-        @ships[1].each do |ship|
-          if ship == target
-          @ships[1].delete(target)
-          end
-        end
+    if@ships.flatten.include?(target)
+      @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
+      if @ships[0].include?(target)
+         @ships[0].delete(target)
       else
-      @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
+         @ships[1].delete(target)
       end
+    else
+      @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
     end
   end
-
-
-
 end

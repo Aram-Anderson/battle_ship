@@ -39,40 +39,43 @@ class Player
     direction = @orientation.sample
     if direction == "H"
     first_space = @three_grid_horitontal_ship_spaces.sample
-      if @ships.flatten.none? {|ship| ship == first_space}
+      unless @ships.flatten.include?(first_space)
         second_space = first_space[0] + first_space[1].next
       else
         place_three_unit_ship
       end
-      if @ships.flatten.none? {|ship| ship == second_space}
+      unless @ships.flatten.include?(second_space)
         third_space = first_space[0] + first_space[1].next.next
       else
         place_three_unit_ship
       end
-      if @ships.flatten.none? {|ship| ship == third_space}
+      unless @ships.flatten.include?(third_space)
         spaces = [first_space, second_space, third_space]
       else
         place_three_unit_ship
       end
     elsif direction == "V"
     first_space = @three_grid_vertical_ship_spaces.sample
-      if @ships.flatten.none? {|ship| ship == first_space}
+      unless @ships.flatten.include?(first_space)
         second_space = first_space[0].next + first_space[1]
       else
         place_three_unit_ship
       end
-      if @ships.flatten.none? {|ship| ship == second_space}
+      unless @ships.flatten.include?(second_space)
         third_space = first_space[0].next.next + first_space[1]
       else
         place_three_unit_ship
       end
-      if @ships.flatten.none? {|ship| ship == third_space}
+      unless @ships.flatten.include?(third_space)
         spaces = [first_space, second_space, third_space]
       else
         place_three_unit_ship
       end
     end
-    binding.pry
+    add_spaces(spaces)
+  end
+
+  def add_spaces(spaces)
     @ships << spaces
   end
 
@@ -90,23 +93,17 @@ class Player
 
   def fire(target)
     if @computer_board.board[target].strip.empty?
-      @ships.flatten.each do |ship|
-        if target == ship
+      if@ships.flatten.include?(target)
         @computer_board.board[target] = "  \xF0\x9F\x92\xA5  "
-        @ships[0].each do |ship|
-          if ship == target
-          @ships[0].delete(target)
-          end
+        if @ships[0].include?(target)
+           @ships[0].delete(target)
         end
-        @ships[1].each do |ship|
-          if ship == target
-          @ships[1].delete(target)
-          end
+        if @ships[1].include?(target)
+           @ships[1].delete(target)
         end
       else
         @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
       end
-    end
     else
       already_fired_at_that_coordinate
       acquire_target

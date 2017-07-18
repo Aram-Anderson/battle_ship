@@ -7,9 +7,9 @@ require './lib/battleship'
 class BattleshipTest < Minitest::Test
 
   def test_class_exists
-    battleship = Battleship.new
+    battleship = BattleShip.new
 
-    assert battleship
+    assert_instance_of BattleShip, battleship
   end
 
 end

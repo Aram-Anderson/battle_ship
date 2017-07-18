@@ -1,3 +1,4 @@
+require './lib/start'
 require './lib/output'
 require 'pry'
 
@@ -38,5 +39,3 @@ include Output
   end
 
 end
-
-# start = BattleShip.new
