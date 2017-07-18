@@ -35,6 +35,7 @@ module Output
 
   def invalid_target
     puts "That target is not on the board. Try again!"
+  end
 
   def place_two_square_ships_message
     puts "Please enter two grid coodinates which are touching one another, and either vertical or horizontal (ie A1 A2 || A1 B1)."
@@ -65,7 +66,7 @@ module Output
   end
 
   def change_turns_player_message
-    puts "It's your turn again"
+    puts "It's your turn"
   end
 
   def sank_opponent_ship_message

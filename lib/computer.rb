@@ -41,7 +41,6 @@ class Computer
       invalid_input_three_ship_placement
       place_three_unit_ship
     end
-    binding.pry
   end
 
 
@@ -49,20 +48,24 @@ class Computer
   def acquire_target
     target = @all_grid_spaces.shuffle!.pop
     @ships.flatten.each do |ship|
-      if ship == target
-        @ships[0].any? do |grid|
-          if grid == target
-            @ships[0].delete(target)
-          else
-            @ships[1].delete(target)
+      if target == ship
+        @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
+        @ships[0].each do |ship|
+          if ship == target
+          @ships[0].delete(target)
           end
         end
-        @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
+        @ships[1].each do |ship|
+          if ship == target
+          @ships[1].delete(target)
+          end
+        end
       else
-        @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
+      @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
       end
     end
   end
+
 
 
 end

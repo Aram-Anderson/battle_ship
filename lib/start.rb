@@ -21,8 +21,7 @@ class Start
     @computer.place_two_unit_ship
     @computer.place_three_unit_ship
     until @computer.ships.flatten.empty? || @player.ships.flatten.empty?
-      computer_board_message
-      @player.computer_board.print_board
+      change_turns_player_message
       @player.acquire_target
       player_board_message
       @player.computer_board.print_board
@@ -31,7 +30,7 @@ class Start
       computer_board_message
       @computer.player_board.print_board
     end
-    if @computer.ships.empty?
+    if @player.ships.empty?
       win_message
     else
       lose_message

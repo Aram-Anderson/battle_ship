@@ -72,6 +72,7 @@ class Player
         place_three_unit_ship
       end
     end
+    binding.pry
     @ships << spaces
   end
 
@@ -90,19 +91,22 @@ class Player
   def fire(target)
     if @computer_board.board[target].strip.empty?
       @ships.flatten.each do |ship|
-        if ship == target
-          @ships[0].any? do |grid|
-            if grid == target
-              @ships[0].delete(target)
-            else
-              @ships[1].delete(target)
-            end
+        if target == ship
+        @computer_board.board[target] = "  \xF0\x9F\x92\xA5  "
+        @ships[0].each do |ship|
+          if ship == target
+          @ships[0].delete(target)
           end
-          @computer_board.board[target] = "  \xF0\x9F\x92\xA5  "
-        else
-          @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
         end
+        @ships[1].each do |ship|
+          if ship == target
+          @ships[1].delete(target)
+          end
+        end
+      else
+        @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
       end
+    end
     else
       already_fired_at_that_coordinate
       acquire_target
