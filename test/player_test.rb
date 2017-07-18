@@ -1,8 +1,10 @@
+require 'simplecov'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/player'
 
+SimpleCov.start
 
 class PlayerTest < Minitest::Test
 
@@ -36,7 +38,7 @@ class PlayerTest < Minitest::Test
     player = Player.new
 
     assert_equal 0, player.ships.count
-    
+
     player.place_two_unit_ship
     player.place_three_unit_ship
 

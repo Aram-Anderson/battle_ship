@@ -78,9 +78,13 @@ class Player
     @ships << spaces
   end
 
-  def acquire_target
+  def get_target
     fire_coordinates_message
     target = gets.chomp
+    acquire_target(target)
+  end
+
+  def acquire_target(target)
     if @computer_board.board.keys.any? { |key| key == target[0..1] }
       fire(target)
     else
@@ -96,12 +100,17 @@ class Player
         @computer_board.board[target] = "  \xF0\x9F\x92\xA5  "
         if @ships[0].include?(target)
            @ships[0].delete(target)
-        end
-        if @ships[1].include?(target)
-           @ships[1].delete(target)
+           if @ships[0].empty?
+             sank_opponent_ship_message
+           end
+        else
+          @ships[1].delete(target)
+          if @ships[1].empty?
+            sank_opponent_ship_message
+          end
         end
       else
-        @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
+      @computer_board.board[target] = "  \xF0\x9F\x92\xA6  "
       end
     else
       already_fired_at_that_coordinate

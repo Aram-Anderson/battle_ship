@@ -20,16 +20,10 @@ class Start
     @computer.place_two_unit_ship
     @computer.place_three_unit_ship
     until @computer.ships.flatten.empty? || @player.ships.flatten.empty?
-      @player.acquire_target
-      if @player.ships[0].empty? || @player.ships[1].empty?
-        sank_opponent_ship_message
-      end
+      @player.get_target
       computer_board_message
       @player.computer_board.print_board
-      @computer.acquire_target
-      if @computer.ships[0].empty? || @computer.ships[1].empty?
-        opponent_sank_your_ship_message
-      end
+      @computer.get_target
       player_board_message
       @computer.player_board.print_board
     end

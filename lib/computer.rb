@@ -43,16 +43,24 @@ class Computer
     end
   end
 
-
-
-  def acquire_target
+  def get_target
     target = @all_grid_spaces.shuffle!.pop
-    if@ships.flatten.include?(target)
-      @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
+    acquire_target(target)
+  end
+
+  def acquire_target(target)
+    if @ships.flatten.include?(target)
+       @player_board.board[target] = "  \xF0\x9F\x92\xA5  "
       if @ships[0].include?(target)
          @ships[0].delete(target)
+         if @ships[0].empty?
+           opponent_sank_your_ship_message
+         end
       else
          @ships[1].delete(target)
+         if @ships[1].empty?
+           opponent_sank_your_ship_message
+         end
       end
     else
       @player_board.board[target] = "  \xF0\x9F\x92\xA6  "
