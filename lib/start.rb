@@ -1,7 +1,6 @@
 require './lib/computer'
 require './lib/player'
 require './lib/board'
-require './lib/battleship'
 
 
 

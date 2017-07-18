@@ -1,4 +1,3 @@
-require './lib/computer'
 require './lib/output'
 require './lib/board'
 require 'pry'
