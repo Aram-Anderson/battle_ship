@@ -14,11 +14,11 @@ module Output
   end
 
   def player_board_message
-    puts "Your board"
+    puts "Your opponent is shooting at this board\n Your ships live here!"
   end
 
   def computer_board_message
-    puts "Your opponent's board"
+    puts "You're shooting at this board\nYour opponent's ships live here!"
   end
 
   def quit_message
@@ -69,12 +69,20 @@ module Output
     puts "It's your turn"
   end
 
-  def sank_opponent_ship_message
-    puts "You sank your opponent's ship with that last shot!"
+  def sank_opponent_two_ship_message
+    puts "You sank your opponent's patrol boat with that last shot!"
   end
 
-  def opponent_sank_your_ship_message
-    puts "Your opponent sank your ship with that last shot!"
+  def opponent_sank_your_two_ship_message
+    puts "Your opponent sank your patrol boat with that last shot!"
+  end
+
+  def sank_opponent_three_ship_message
+    puts "You sank your opponent's battleship with that last shot!"
+  end
+
+  def opponent_sank_your_three_ship_message
+    puts "Your opponent sank your battleship with that last shot!"
   end
 
   def win_message

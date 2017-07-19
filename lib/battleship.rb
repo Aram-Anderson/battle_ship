@@ -39,3 +39,4 @@ include Output
   end
 
 end
+game = BattleShip.new

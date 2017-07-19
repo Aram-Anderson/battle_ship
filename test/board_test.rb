@@ -4,8 +4,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/board'
 
-SimpleCov.start
-
 class BoardTest < Minitest::Test
 
   def test_board_exists

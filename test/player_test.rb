@@ -2,11 +2,11 @@ require 'simplecov'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/player'
+require './lib/computer_board'
 
 SimpleCov.start
 
-class PlayerTest < Minitest::Test
+class ComputerBoardTest < Minitest::Test
 
   def test_it_exists
     player = Player.new
