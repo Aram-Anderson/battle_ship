@@ -32,7 +32,7 @@ class Computer
          end
       end
     else
-      @player_board.board.board[target] = "  \xF0\x9F\x92\xA6  "
+      @player_board.board.board[target] = "  \xF0\x9F\x92\xA9  "
     end
   end
 end

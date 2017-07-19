@@ -44,7 +44,7 @@ class Player
           end
         end
       else
-      @computer_board.board.board[target] = "  \xF0\x9F\x92\xA6  "
+      @computer_board.board.board[target] = "  \xF0\x9F\x92\xA9  "
       end
     else
       already_fired_at_that_coordinate

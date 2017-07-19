@@ -30,10 +30,10 @@ class Start
       computer_board_message
       @computer_board.board.print_board
     end
-    if @computer_board.ships.flatten.empty?
-      win_message
+    if @player_board.ships.flatten.empty?
+      lose_message      
     else
-      lose_message
+      win_message
     end
     new_game = BattleShip.new
   end
