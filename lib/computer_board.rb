@@ -42,7 +42,7 @@ class ComputerBoard
         @spaces = [first_space, second_space, third_space]
       end
     end
-    add_spaces(space = @spaces)
+    add_spaces(spaces = @spaces)
   end
 
   def add_spaces(spaces)
