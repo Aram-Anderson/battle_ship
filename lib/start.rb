@@ -4,8 +4,6 @@ require './lib/board'
 require './lib/computer_board'
 require './lib/player_board'
 
-
-
 class Start
 
   include Output
@@ -19,8 +17,8 @@ class Start
   end
 
   def game_process
-    @player_board.place_two_unit_ship
-    @player_board.place_three_unit_ship
+    @player_board.get_two_input
+    @player_board.get_three_input
     @computer_board.place_two_unit_ship
     @computer_board.place_three_unit_ship
     until @computer_board.ships.flatten.empty? ||

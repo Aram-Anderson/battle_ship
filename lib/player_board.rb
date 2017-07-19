@@ -1,9 +1,11 @@
 require './lib/board'
 require './lib/output'
+require './lib/validate_player_board'
 
 class PlayerBoard
 
   include Output
+  include ValidatePlayerBoard
 
   attr_accessor :board, :ships
 
@@ -12,32 +14,33 @@ class PlayerBoard
     @ships = []
   end
 
-  def place_two_unit_ship
+  def get_two_input
     place_two_square_ships_message
-    input = gets.chomp.split(" ").sort
-      if @board.board.keys.any? { |key| key == input[0] } &&
-         @board.board.keys.any? { |key| key == input[1] } &&
-          (input.join[0].next == input.join[2] || input.join[1].next == input.join[3])
+    input = gets.chomp.upcase.split(" ").sort
+    place_two_unit_ship(input)
+  end
+
+  def place_two_unit_ship(input)
+      if validate_two(input)
         @ships << input
       else
         invalid_input
-        place_two_unit_ship
+        get_two_input
       end
   end
 
-  def place_three_unit_ship
+  def get_three_input
     place_three_square_ships_message
-    input = gets.chomp.split(" ").sort
-    if @board.board.any? { |key, value| key == input[0] } &&
-       @board.board.any? { |key, value| key == input[1] } &&
-       @board.board.any? { |key, value| key == input[2] } &&
-       @ships.flatten.none? { |ship| ship == input[0] && input[1] && input[2] } &&
-       (input.join[0].next == input.join[2] || input.join[1].next == input.join[3]) &&
-       (input.join[0].next.next == input.join[4] || input.join[1].next.next == input.join[5])
+    input = gets.chomp.upcase.split(" ").sort
+    place_three_unit_ship(input)
+  end
+
+  def place_three_unit_ship(input)
+    if validate_three(input)
       @ships << input
     else
       invalid_input_three_ship_placement
-      place_three_unit_ship
+      get_three_input
     end
   end
 
