@@ -3,6 +3,8 @@ require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/player'
 require './lib/computer_board'
+require 'simplecov'
+SimpleCov.start
 
 class ComputerTest < Minitest::Test
 
