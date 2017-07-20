@@ -36,7 +36,7 @@ class Computer
       end
     else
       opponent_miss_message
-      @player_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
+      @player_board.board.layout[target] = "  \xF0\x9F\x92\xA6  "
     end
   end
 end

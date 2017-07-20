@@ -39,7 +39,7 @@ class Player
       else
         @shots += 1
         you_miss_message
-        @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
+        @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA6  "
       end
     else
       already_fired_at_that_coordinate

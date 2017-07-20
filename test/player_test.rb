@@ -14,6 +14,12 @@ class ComputerTest < Minitest::Test
     assert_instance_of Player, player
   end
 
+  def test_it_initializes_with_shots
+    player = Player.new
+
+    assert_equal 0, player.shots
+  end
+
   def test_player_can_shoot_at_grid_spaces
     # skip
     player = Player.new
