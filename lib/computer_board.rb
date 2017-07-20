@@ -5,7 +5,7 @@ class ComputerBoard
   attr_accessor :board, :ships
 
   def initialize
-    @computer_board = Board.new
+    @board = Board.new
     @ships = []
     @spaces = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
     @two_grid_vertical_ship_spaces = ["A1", "A2", "A3", "A4" "B1", "B2", "B3", "B4" "C1", "C2", "C3", "C4"]
@@ -18,16 +18,26 @@ class ComputerBoard
   def place_two_unit_ship
     direction = @orientation.sample
     if direction == "H"
-      first_space = @two_grid_horizontal_ship_spaces.sample
-      second_space = first_space[0] + first_space[1].next
-      spaces = first_space, second_space
+      two_ship_horizontal_placement
     elsif direction == "V"
-      first_space = @two_grid_vertical_ship_spaces.sample
-      second_space = first_space[0].next + first_space[1]
-      spaces = first_space, second_space
+      two_ship_vertical_placement
     end
+  end
+
+  def two_ship_horizontal_placement
+    first_space = @two_grid_horizontal_ship_spaces.sample
+    second_space = first_space[0] + first_space[1].next
+    spaces = first_space, second_space
     add_spaces(spaces)
   end
+
+  def two_ship_vertical_placement
+    first_space = @two_grid_vertical_ship_spaces.sample
+    second_space = first_space[0].next + first_space[1]
+    spaces = first_space, second_space
+    add_spaces(spaces)
+  end
+
 
   def place_three_unit_ship
     until (@spaces & ships.flatten).empty?
