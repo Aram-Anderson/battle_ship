@@ -19,7 +19,7 @@ class Computer
 
   def acquire_target(target)
     if @player_board.ships.flatten.include?(target)
-       @player_board.board.board[target] = "  \xF0\x9F\x92\xA5  "
+       @player_board.board.layout[target] = "  \xF0\x9F\x92\xA5  "
       if @player_board.ships[0].include?(target)
          @player_board.ships[0].delete(target)
          if @player_board.ships[0].empty?
@@ -32,7 +32,7 @@ class Computer
          end
       end
     else
-      @player_board.board.board[target] = "  \xF0\x9F\x92\xA9  "
+      @player_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
     end
   end
 end

@@ -15,6 +15,7 @@ class PlayerBoard
   end
 
   def get_two_input
+    @board.print_board
     place_two_square_ships_message
     input = gets.chomp.upcase.split(" ").sort
     place_two_unit_ship(input)
@@ -30,6 +31,7 @@ class PlayerBoard
   end
 
   def get_three_input
+    @board.print_board
     place_three_square_ships_message
     input = gets.chomp.upcase.split(" ").sort
     place_three_unit_ship(input)

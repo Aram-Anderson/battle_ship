@@ -1,4 +1,6 @@
+require 'simplecov'
 require './lib/board'
+SimpleCov.start
 
 class ComputerBoard
 

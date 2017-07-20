@@ -3,7 +3,8 @@ require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/computer'
 require './lib/player_board'
-
+require 'simplecov'
+SimpleCov.start
 
 class ComputerTest < Minitest::Test
 
@@ -14,14 +15,14 @@ class ComputerTest < Minitest::Test
   end
 
   def test_it_can_shoot_at_grid_spaces
-    @computer = Computer.new
-    @board = PlayerBoard.new
+    computer = Computer.new
+    player_board = PlayerBoard.new
 
-    assert @board.board.board.values.all? {|x| x == "     "}
+    assert player_board.board.layout.values.all? {|x| x == "     "}
 
-    @computer.get_target(@board)
+    computer.get_target(player_board)
 
-    refute @board.board.board.values.all? {|x| x == "     "}
+    refute player_board.board.layout.values.all? {|x| x == "     "}
   end
 
 end

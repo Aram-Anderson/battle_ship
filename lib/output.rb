@@ -10,7 +10,7 @@ module Output
   end
 
   def show_instructions
-     puts "Battleship is a guessing game in which there is a 4x4 grid with columns labeled from A to D, and rows labeled from 1 to 4. You will be playing against a computer oponent. Both you and your oponent will each have two ships to place on the board. One ship occupies two consecutive spaces of the grid, and the other occupies three. Ships must be placed either vertically or horizontally. They cannot wrap around the board. Once gameplay starts, you and your oponent will take turns shooting at the other player's ships. This is done by guessing grid spaces (ie A1). Once a grid space has been fired at, it will display an indication of either a \xF0\x9F\x92\xA5 (which indicates a hit) or \xF0\x9F\x92\xA9 (which indicates a miss). The game is won when all of the oponent's ships have been sunk, or lost if the oponent sinks all of yours."
+     puts "Battleship is a guessing game in which there is a 4x4 grid with rows labeled from A to D, and columns labeled from 1 to 4. You will be playing against a computer oponent. Both you and your oponent will each have two ships to place on the board. One ship occupies two consecutive spaces of the grid, and the other occupies three. Ships must be placed either vertically or horizontally. They cannot wrap around the board. Once gameplay starts, you and your oponent will take turns shooting at the other player's ships. This is done by guessing grid spaces (ie A1). Once a grid space has been fired at, it will display an indication of either a \xF0\x9F\x92\xA5 (which indicates a hit) or \xF0\x9F\x92\xA9 (which indicates a miss). The game is won when all of the oponent's ships have been sunk, or lost if the oponent sinks all of yours."
   end
 
   def player_board_message
@@ -38,7 +38,7 @@ module Output
   end
 
   def place_two_square_ships_message
-    puts "Please enter two grid coodinates which are touching one another, and either vertical or horizontal (ie A1 A2 || A1 B1)."
+    puts "Your board is printed above. Please enter two grid coodinates which are touching one another, and either vertical or horizontal (ie A1 A2 || A1 B1)."
   end
 
   def place_three_square_ships_message

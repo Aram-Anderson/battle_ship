@@ -1,9 +1,9 @@
 class Board
-  attr_accessor :board
+  attr_accessor :layout
   attr_reader :print_board
 
   def initialize
-    @board =  {
+    @layout =  {
       "A1" => "     ",
       "A2" => "     ",
       "A3" => "     ",

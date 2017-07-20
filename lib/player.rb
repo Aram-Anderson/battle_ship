@@ -12,14 +12,14 @@ class Player
   end
 
   def get_target(computer_board)
-    @computer_board = computer_board
     fire_coordinates_message
     target = gets.chomp
-    acquire_target(target)
+    acquire_target(target, computer_board)
   end
 
-  def acquire_target(target)
-    if @computer_board.board.board.keys.any? { |key| key == target[0..1] }
+  def acquire_target(target, computer_board)
+    @computer_board = computer_board
+    if @computer_board.board.layout.keys.any? { |key| key == target[0..1] }
       fire(target)
     else
       invalid_target
@@ -34,7 +34,7 @@ class Player
         hit_target(target)
         sink_ship(target)
       else
-      @computer_board.board.board[target] = "  \xF0\x9F\x92\xA9  "
+      @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
       end
     else
       already_fired_at_that_coordinate
@@ -43,7 +43,7 @@ class Player
   end
 
   def validate_target(target)
-    @computer_board.board.board[target].strip.empty?
+    @computer_board.board.layout[target].strip.empty?
   end
 
   def board_includes(target)
@@ -51,7 +51,7 @@ class Player
   end
 
   def hit_target(target)
-    @computer_board.board.board[target] = "  \xF0\x9F\x92\xA5  "
+    @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA5  "
   end
 
   def sink_ship(target)
