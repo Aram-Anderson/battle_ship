@@ -2,6 +2,12 @@ require './lib/board'
 
 class ComputerBoard
 
+  attr_reader :spaces,
+              :two_grid_vertical_ship_spaces,
+              :two_grid_horizontal_ship_spaces,
+              :three_grid_vertical_ship_spaces,
+              :three_grid_horitontal_ship_spaces,
+              :orientation
   attr_accessor :board, :ships
 
   def initialize
@@ -59,6 +65,10 @@ class ComputerBoard
 
   def add_spaces(spaces)
     @ships << spaces
+  end
+
+  def print_board
+    @board.print_board
   end
 
 end

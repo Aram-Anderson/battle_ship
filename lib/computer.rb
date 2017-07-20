@@ -4,6 +4,8 @@ require './lib/output'
 
 class Computer
 
+  attr_reader :all_grid_spaces
+
   include Output
 
   def initialize

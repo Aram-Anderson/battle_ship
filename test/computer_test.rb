@@ -14,6 +14,13 @@ class ComputerTest < Minitest::Test
     assert_instance_of Computer, computer
   end
 
+  def test_it_initializes_with_grid_spaces
+    expected = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+    computer = Computer.new
+
+    assert_equal expected, computer.all_grid_spaces
+  end
+
   def test_it_can_shoot_at_grid_spaces
     computer = Computer.new
     player_board = PlayerBoard.new

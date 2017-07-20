@@ -27,14 +27,14 @@ class Start
       @player_board.ships.flatten.empty?
       @player.get_target(@computer_board)
       computer_board_message
-      @computer_board.board.print_board
+      @computer_board.print_board
       continue_message
       validate_input
         @computer.get_target(@player_board)
         player_board_message
-        @player_board.board.print_board
+        @player_board.print_board
         computer_board_message
-        @computer_board.board.print_board
+        @computer_board.print_board
     end
     @end_time = Time.now
     if @player_board.ships.flatten.empty?

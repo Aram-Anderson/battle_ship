@@ -46,4 +46,8 @@ class PlayerBoard
     end
   end
 
+  def print_board
+    @board.print_board
+  end 
+
 end
