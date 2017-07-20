@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Board
   attr_accessor :layout
   attr_reader :print_board
@@ -24,13 +26,13 @@ class Board
   end
 
   def print_board
-    print "=========================" + "\n"
+    print "=========================".blue + "\n"
     print ["  .  ", "  1  ", "  2  ", "  3  ", "  4  "].join + "\n"
-    print [" A>  ", @board["A1"].center(5), @board["A2"].center(5), @board["A3"].center(5), @board["A4"].center(5)].join + "\n"
-    print [" B>  ", @board["B1"].center(5), @board["B2"].center(5), @board["B3"].center(5), @board["B4"].center(5)].join + "\n"
-    print [" C>  ", @board["C1"].center(5), @board["C2"].center(5), @board["C3"].center(5), @board["C4"].center(5)].join + "\n"
-    print [" D>  ", @board["D1"].center(5), @board["D2"].center(5), @board["D3"].center(5), @board["D4"].center(5)].join + "\n"
-    print "=========================" + "\n"
+    print [" A>  ", @layout["A1"].center(5), @layout["A2"].center(5), @layout["A3"].center(5), @layout["A4"].center(5)].join + "\n"
+    print [" B>  ", @layout["B1"].center(5), @layout["B2"].center(5), @layout["B3"].center(5), @layout["B4"].center(5)].join + "\n"
+    print [" C>  ", @layout["C1"].center(5), @layout["C2"].center(5), @layout["C3"].center(5), @layout["C4"].center(5)].join + "\n"
+    print [" D>  ", @layout["D1"].center(5), @layout["D2"].center(5), @layout["D3"].center(5), @layout["D4"].center(5)].join + "\n"
+    print "=========================".blue + "\n"
   end
 
 end

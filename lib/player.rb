@@ -7,13 +7,16 @@ class Player
 
   include Output
 
+  attr_reader :shots
+
   def initialize
     @computer_board = nil
+    @shots = 0
   end
 
   def get_target(computer_board)
     fire_coordinates_message
-    target = gets.chomp
+    target = gets.chomp.upcase
     acquire_target(target, computer_board)
   end
 
@@ -34,7 +37,9 @@ class Player
         hit_target(target)
         sink_ship(target)
       else
-      @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
+        @shots += 1
+        you_miss_message
+        @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA9  "
       end
     else
       already_fired_at_that_coordinate
@@ -51,6 +56,8 @@ class Player
   end
 
   def hit_target(target)
+    @shots += 1
+    you_hit_message
     @computer_board.board.layout[target] = "  \xF0\x9F\x92\xA5  "
   end
 

@@ -2,8 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/board'
-require 'simplecov'
-SimpleCov.start
+
 
 class BoardTest < Minitest::Test
 

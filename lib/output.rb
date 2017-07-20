@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Output
 
   def intro_message
@@ -14,11 +16,15 @@ module Output
   end
 
   def player_board_message
-    puts "Your opponent is shooting at this board\n Your ships live here!"
+    puts "Your opponent is shooting at this board\nYour ships live here!"
   end
 
   def computer_board_message
     puts "You're shooting at this board\nYour opponent's ships live here!"
+  end
+
+  def continue_message
+    puts "Press 'Enter' to continue."
   end
 
   def quit_message
@@ -49,12 +55,20 @@ module Output
     puts "What grid coordinate would you like to fire at? Enter a grid position beginning with a letter from A-D followed by a number from 1-4 (ie A2): "
   end
 
-  def hit_message
-    puts "That shot was a hit!"
+  def you_hit_message
+    puts "Your shot was a hit!".red.on_black
   end
 
-  def miss_message
-    puts "That shot was a miss!"
+  def you_miss_message
+    puts "Your shot was a miss!".black.on_white
+  end
+
+  def opponent_hit_message
+    puts "The opponent's shot was a hit!".red.on_black
+  end
+
+  def opponent_miss_message
+    puts "The opponent's shot was a miss!".black.on_white
   end
 
   def already_fired_at_that_coordinate
@@ -70,27 +84,27 @@ module Output
   end
 
   def sank_opponent_two_ship_message
-    puts "You sank your opponent's patrol boat with that last shot!"
+    puts "You sank your opponent's patrol boat with that last shot!".black.on_yellow.blink
   end
 
   def opponent_sank_your_two_ship_message
-    puts "Your opponent sank your patrol boat with that last shot!"
+    puts "Your opponent sank your patrol boat with that last shot!".red.on_black.blink
   end
 
   def sank_opponent_three_ship_message
-    puts "You sank your opponent's battleship with that last shot!"
+    puts "You sank your opponent's battleship with that last shot!".black.on_yellow.blink
   end
 
   def opponent_sank_your_three_ship_message
-    puts "Your opponent sank your battleship with that last shot!"
+    puts "Your opponent sank your battleship with that last shot!".red.on_black.blink
   end
 
   def win_message
-    puts "You won! You sank all your opponent's ships!"
+    puts "You won! You sank all your opponent's ships! You fired #{@player.shots} shots to do it! It took you #{(@end_time - @start_time).round(2)} seconds to play.".cyan.on_black
   end
 
   def lose_message
-    puts "Your opponent sank all your ships! Sorry, but you lost this time."
+    puts "Your opponent sank all your ships! Sorry, but you lost this time. You fired #{@player.shots}, but it was in vain. It took you #{(@end_time - @start_time).round(2)} seconds to play.".red.on_black
   end
 
   def play_again_message

@@ -1,6 +1,5 @@
 require 'player_board'
-require 'simplecov'
-SimpleCov.start
+
 
 class PlayerBoardTest < Minitest::Test
 
