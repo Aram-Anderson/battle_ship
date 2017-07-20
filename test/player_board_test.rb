@@ -10,6 +10,18 @@ class PlayerBoardTest < Minitest::Test
     assert_instance_of PlayerBoard, player_board
   end
 
+  def test_it_initializes_with_a_board
+    player = PlayerBoard.new
+
+    assert_instance_of Board, player.board
+  end
+
+  def test_it_initializes_with_ships
+    player = PlayerBoard.new
+
+    assert_equal [], player.ships
+  end
+
   def test_it_can_place_two_unit_ship
     player_board = PlayerBoard.new
 
